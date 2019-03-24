@@ -17,11 +17,16 @@ type User struct {
 var users []User
 
 func createUser(w http.ResponseWriter, r *http.Request) {
-
+	var user User
+	//ignore errors for this version
+	_ = json.NewDecoder(r.body).Decode(&user)
+	users = append(users, user)
+	json.NewEncoder(w).Encode(users)
 }
 
 func getUser(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
+	//ignore errors for this version
 	for _, user := range users {
 		if user.Id == params["id"] {
 			json.NewEncoder(w).Encode(user)
