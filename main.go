@@ -9,6 +9,7 @@ import (
 )
 
 type User struct {
+	Id       string `json:"id,omitempty"`
 	Username string `json:"username,omitempty"`
 	Email    string `json:"email,omitempty"`
 }
@@ -20,7 +21,13 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func getUser(w http.ResponseWriter, r *http.Request) {
-
+	params := mux.Vars(r)
+	for _, user := range users {
+		if user.Id == params["id"] {
+			json.NewEncoder(w).Encode(user)
+			return
+		}
+	}
 }
 
 func listUsers(w http.ResponseWriter, r *http.Request) {
