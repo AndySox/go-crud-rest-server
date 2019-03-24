@@ -19,7 +19,7 @@ var users []User
 func createUser(w http.ResponseWriter, r *http.Request) {
 	var user User
 	//ignore errors for this version
-	_ = json.NewDecoder(r.body).Decode(&user)
+	_ = json.NewDecoder(r.Body).Decode(&user)
 	users = append(users, user)
 	json.NewEncoder(w).Encode(users)
 }
