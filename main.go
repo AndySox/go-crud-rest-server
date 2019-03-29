@@ -15,7 +15,6 @@ type User struct {
 	Email    string `json:"email,omitempty"`
 }
 
-// slice of user structs
 var users []User
 
 func createUser(w http.ResponseWriter, r *http.Request) {
